@@ -1,0 +1,61 @@
+﻿@model Nirvanbodhi_project2.Models.Login_Form
+
+@{
+    ViewBag.Title = "Index";
+}
+<link href="~/Content/images/StyleSheet1.css" rel="stylesheet" />
+<h2>Index</h2>
+@Html.Raw(ViewData["data"]);
+@Html.Raw(ViewBag.insertmessages);
+
+@using (Html.BeginForm("Index", "Home", FormMethod.Post))
+{
+
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+       
+        <img src="~/Content/images/user.png" class="avtar" />
+        <h4>Login_Form</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Username, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Username, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        
+        
+            <div class="form-group1">
+                <div class="col-md-offset-2 col-md-10">
+                    @*<input type="submit" value="Login" class="btn btn-default" />*@
+                    <div class="button">
+                        <input type="submit" style="height: 50px; width: 150px"><br />
+                    </div>
+                </div>
+                @Html.ActionLink("Click Here to Signup", "signup")
+
+                @*<input type="button" value="Register" onclick="window.location.href='<%= @Url.Action(" signup", "Home" ) %>';" />*@
+
+                <input type="button" value="Register" onclick="@("window.location.href='" + @Url.Action("signup", "Home") + "'");" />
+        </div>
+    </div>
+
+}
+@*<input type='button' value='Register' id='myButton' onClick='redirectOnClick()' />
+<script>
+function redirectOnClick(){
+    document.location = 'Home' / 'Signup';
+}
+</script>*@
+
